@@ -6,10 +6,24 @@
 }
 :root {
   --heading-font: "Nunito Sans", serif;
+  --other-font: "Montserrat", serif;
 }
 
+body {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 30px auto;
+  border: #001eb3 solid 5px;
+  border-radius: 5px;
+}
 
-
+body,
+head,
+footer {
+  background-color: white;
+  width: 80%;
+}
 
 .siteName {
   font-family: var(--heading-font);
@@ -18,6 +32,7 @@
 #top-header {
   display: flex;
   justify-content: space-between;
+  padding: 15px;
 }
 
 #top-header a {
@@ -29,7 +44,7 @@ nav {
   background-color: #001eb3;
   color: white;
   border-radius: 5px;
-  background-image: url("/public/images/site/checkerboard.jpg");
+  margin: 0 25px;
 }
 
 nav li {
@@ -42,4 +57,180 @@ nav ul {
   flex-direction: row;
   justify-content: space-evenly;
   padding: 15px;
+}
+
+/* body */
+
+h2 {
+  font-family: var(--heading-font);
+  padding: 5px;
+}
+
+.hero-label {
+  font-family: var(--other-font);
+  font-size: xx-large;
+  text-align: left;
+  padding: 0 25px;
+}
+
+.hero img {
+  width: 75%;
+  object-fit: cover;
+}
+
+.label button {
+  font-family: var(--other-font);
+  color: white;
+  font-size: large;
+  border-radius: 5px;
+  background-color: #001eb3;
+  padding: 10px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 80%;
+  align-items: center;
+}
+.label {
+  width: 250px;
+  height: 100%;
+  text-align: left;
+  position: absolute;
+  top: 20px;
+  left: 150px;
+  backdrop-filter: blur(0.4rem);
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+}
+.description {
+  font-family: var(--other-font);
+  color: #001eb3;
+  font-weight: bolder;
+  font-size: xx-large;
+}
+
+.hero {
+  position: relative;
+}
+
+/* UPGRADES */
+#upgrade-reviews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.upgrade {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 25px;
+}
+
+.upgrade img {
+  width: 80px;
+  height: 80px;
+}
+
+.upgrade-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.upgrade-img {
+  width: 200px;
+  height: 100px;
+  background-color: #001eb3;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#upgrade-reviews h3 {
+  font-family: var(--heading-font);
+  font-weight: 800;
+  font-size: 30px;
+}
+
+.reviews {
+  height: 100%;
+}
+
+.reviews ul li {
+  font-family: var(--other-font);
+  padding: 20px;
+}
+
+html {
+  background: url("/images/site/checkerboard.jpg");
+}
+
+@media screen and (max-width: 500px) {
+  html {
+    background-image: none;
+  }
+
+  body,
+  head,
+  footer {
+    background-color: white;
+    width: 100%;
+  }
+
+  body {
+    border: none;
+  }
+
+  #top-header {
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  #upgrade-reviews {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .upgrade-img {
+    width: 150px;
+    height: 100px;
+  }
+
+  .reviews ul li {
+    padding: 5px;
+  }
+  .hero-label {
+    font-size: x-large;
+    padding: 0 0;
+  }
+
+  nav {
+    margin: 0 0;
+  }
+  .label button {
+    font-size: small;
+    padding: 2px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    width: 100%;
+    align-items: center;
+  }
+  .label {
+    width: 120px;
+    height: 110px;
+    text-align: left;
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    backdrop-filter: blur(0.4rem);
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
+  }
+  .description {
+    font-family: var(--other-font);
+    color: #001eb3;
+    font-weight: bolder;
+    font-size: x-small;
+  }
 }
