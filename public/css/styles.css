@@ -4,3 +4,42 @@
 *:after {
   box-sizing: border-box;
 }
+:root {
+  --heading-font: "Nunito Sans", serif;
+}
+
+
+
+
+.siteName {
+  font-family: var(--heading-font);
+}
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#top-header a {
+  text-decoration: none;
+  color: black;
+}
+
+nav {
+  background-color: #001eb3;
+  color: white;
+  border-radius: 5px;
+  background-image: url("/public/images/site/checkerboard.jpg");
+}
+
+nav li {
+  list-style: none;
+  font-size: larger;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 15px;
+}
