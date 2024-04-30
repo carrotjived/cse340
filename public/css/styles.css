@@ -29,7 +29,7 @@ footer {
 
 .siteName {
   font-family: var(--heading-font);
-  font-size: xx-large;
+  font-size: 75px;
   font-weight: bolder;
   padding: 20px;
 }
@@ -238,6 +238,16 @@ html {
     font-weight: bolder;
     font-size: x-small;
   }
+
+  .siteName {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: medium;
+  }
+
+
 }
 
 @media screen and (min-width: 501px) and (max-width: 768px){
@@ -278,6 +288,10 @@ html {
 
   .reviews ul li{
     padding: 5px;
+  }
+
+  .siteName {
+    font-size: 50px;
   }
 
 }
