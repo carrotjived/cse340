@@ -18,6 +18,8 @@ body {
   border-radius: 5px;
 }
 
+
+
 body,
 head,
 footer {
@@ -27,6 +29,9 @@ footer {
 
 .siteName {
   font-family: var(--heading-font);
+  font-size: xx-large;
+  font-weight: bolder;
+  padding: 20px;
 }
 
 #top-header {
