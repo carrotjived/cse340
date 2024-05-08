@@ -46,7 +46,7 @@ footer {
 }
 
 nav {
-  background-color: #001eb3;
+  background-color: black;
   color: white;
   border-radius: 5px;
   margin: 0 25px;
@@ -55,12 +55,24 @@ nav {
 nav li {
   list-style: none;
   font-size: larger;
+
+}
+
+nav li a{
+  color: white;
+  text-decoration: none;
+}
+
+nav li a:hover{
+  background-color: white;
+  color: black;
+  padding: 5px;
 }
 
 nav ul {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   padding: 15px;
 }
 
