@@ -31,9 +31,14 @@ app.use("/inv", inventoryRoute);
 //Index Route
 // app.get("/", utilities.handleErrors(baseController.buildHome));
 app.get("/", utilities.handleErrors(baseController.buildHome));
-
-
-
+app.get(
+  "/inv/type/",
+  utilities.handleErrors(invControllers.buildByClassificationId)
+);
+app.get(
+  "/inv/details/",
+  utilities.handleErrors(invControllers.buildByInventoryId)
+);
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
