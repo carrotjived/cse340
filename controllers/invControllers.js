@@ -27,16 +27,16 @@ invCont.buildByInventoryId = async function (req, res, next) {
   const data = await invModel.getInventoryByInventoryId(inventory_id);
   const details = await utilities.buildItemInventoryGrid(data);
   let nav = await utilities.getNav();
-  console.log(data);
   const carYear = data[0].inv_year;
   const carMake = data[0].inv_make;
   const carModel = data[0].inv_model;
-
   res.render("./inventory/inventory-details", {
     title: carYear + " " + carMake + " " + carModel,
     nav,
     details,
   });
 };
+
+
 
 module.exports = invCont;

@@ -128,7 +128,7 @@ Util.buildItemInventoryGrid = async function (data) {
     });
     item += "</section>";
   } else {
-    item += '<p class=notice">Sorry, no matching no vehicle found. </p>';
+    item += '<p class=notice">Sorry, no matching vehicle found. </p>';
   }
   return item;
 };
@@ -140,5 +140,6 @@ Util.buildItemInventoryGrid = async function (data) {
  **************************************** */
 Util.handleErrors = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
+
 
 module.exports = Util;

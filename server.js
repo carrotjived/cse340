@@ -39,6 +39,7 @@ app.get(
   "/inv/details/",
   utilities.handleErrors(invControllers.buildByInventoryId)
 );
+app.get("/error", baseController.throwError)
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
