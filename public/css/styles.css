@@ -16,7 +16,6 @@ body {
   margin: 30px auto;
   border: #001eb3 solid 5px;
   border-radius: 5px;
-  
 }
 
 body,
@@ -245,10 +244,54 @@ h1 {
   font-weight: bold;
 }
 
+/* Login Forms */
+
+#login {
+  padding: 50px;
+}
+#login label,
+#login input,#register label,#register input{
+  margin-bottom: 15px;
+}
+
+#login input,#register input {
+  width: 25%;
+  padding: 10px;
+}
+
+#login label, #register label{
+  font-size: x-large;
+  font-family: var(--other-font);
+}
+
+#login input[type="submit"],#register input[type="submit"]{
+  font-size: large;
+}
+
+#login input:required ,#register input:required{
+  border-left: solid 6px black;
+}
+
+#login input:required:valid,#register input:required:valid {
+  border-left: solid 6px green;
+}
+
+#messages {
+  font-size: large;
+  font-family: var(--other-font);
+}
+
+#register span,#login span {
+  font-style: italic;
+  font-family: var(--other-font);
+ 
+}
+
+
+
 @media screen and (max-width: 500px) {
   html {
     background-image: none;
-
   }
 
   body,
@@ -329,6 +372,15 @@ h1 {
   #inv-display {
     display: flex;
     flex-direction: column;
+  }
+
+  #login input {
+    width: 100%;
+    padding: 10px;
+  }
+
+  #register input {
+    width: 90%;
   }
 }
 
