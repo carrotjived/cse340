@@ -287,6 +287,14 @@ h1 {
  
 }
 
+.notice li{
+  list-style: none;
+  color: red;
+  padding: 10px;
+  font-family: var(--other-font);
+  font-style: italic;
+}
+
 
 
 @media screen and (max-width: 500px) {
