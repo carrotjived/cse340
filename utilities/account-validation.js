@@ -56,7 +56,7 @@ validate.registrationRules = () => {
  * Check data and return errors or continue to registration
  * ***************************** */
 validate.checkRegData = async (req, res, next) => {
-  const { acccount_firstname, account_lastname, account_email } = req.body;
+  const { account_firstname, account_lastname, account_email } = req.body;
   let errors = [];
   errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -65,7 +65,7 @@ validate.checkRegData = async (req, res, next) => {
       errors,
       title: "Registration",
       nav,
-      acccount_firstname,
+      account_firstname,
       account_lastname,
       account_email,
     });

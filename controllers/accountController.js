@@ -1,5 +1,6 @@
 const utilities = require("../utilities");
 const accountModel = require("../models/account-model");
+const bcrypt = require("bcryptjs");
 const accountController = {};
 
 /* ****************************************
@@ -10,6 +11,7 @@ accountController.buildLogin = async function (req, res, next) {
   res.render("./account/login", {
     title: "Login",
     nav,
+    errors: null,
   });
 };
 
@@ -39,15 +41,12 @@ accountController.registerAccount = async function (req, res) {
     account_password,
   } = req.body;
 
-  console.log(req.body);
   const regResult = await accountModel.registerAccount(
     account_firstname,
     account_lastname,
     account_email,
     account_password
   );
-
-  console.log(regResult);
 
   if (regResult) {
     req.flash(
@@ -57,6 +56,7 @@ accountController.registerAccount = async function (req, res) {
     res.status(201).render("./account/login", {
       title: "Login",
       nav,
+      errors: null,
     });
   } else {
     req.flash("notice", "Sorry, registration failed.");
