@@ -258,18 +258,23 @@ h1 {
 #add-classification label,
 #add-classification input,
 #add-inventory label,
-#add-inventory input {
+#add-inventory input, #classificationList {
   margin-bottom: 15px;
 }
 
 #login input,
-#register input ,#add-inventory input{
+#register input {
   width: 25%;
   padding: 10px;
 }
 
 #add-classification input {
   width: 50%;
+  padding: 10px;
+}
+
+#add-inventory input,#classificationList {
+  width: 35%;
   padding: 10px;
 }
 
@@ -317,6 +322,13 @@ h1 {
   font-family: var(--other-font);
   font-style: italic;
 }
+
+#classificationList {
+  font-family: var(--other-font);
+
+}
+
+
 
 
 

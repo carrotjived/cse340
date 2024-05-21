@@ -88,10 +88,64 @@ invCont.addClassification = async function (req, res) {
  * ************************** */
 invCont.buildAddInventory = async function (req, res) {
   let nav = await utilities.getNav();
+  const classification_id = req.params.classification_id;
+  console.log(classification_id);
+  const classificationList = await utilities.buildClassificationList(
+    classification_id
+  );
   res.render("./inventory/add-inventory", {
     title: "Add New Vehicles",
     nav,
+    classificationList,
   });
+};
+
+/* ***************************
+ *  Add Classificaiton to Database
+ * ************************** */
+
+invCont.addInventoryData = async function (req, res) {
+  let nav = await utilities.getNav();
+  const {
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+
+  const addInventoryData = await invModel.addInventory(
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id
+  );
+
+  if (addInventoryData) {
+    req.flash("notice", "New Car Added");
+    res.status(201).render("./inventory/management", {
+      title: "Vehicle Management",
+      nav,
+      errors: null,
+    });
+  } else {
+    req.flash("notice", "Sorry, cannot add vehicle.");
+    res.status(501).render("./inventory/add-inventory", {
+      title: "Add New Vehicle",
+      nav,
+    });
+  }
 };
 
 module.exports = invCont;

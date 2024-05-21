@@ -2,7 +2,7 @@
 <h1><%= title %></h1>
 <%}else {res.redirect('/')} %>
 
-<form action="inv/add-inventory" method="post" id="add-inventory">
+<form action="/inv/add-inventory" method="post" id="add-inventory">
   <label id="make">Inventory Make: </label><br />
   <input
     type="text"
@@ -23,11 +23,13 @@
 
   <label id="year">Year: </label><br />
   <input
-    type="date"
+    type="number"
     required
     placeholder="Year"
     name="inv_year"
     value="<%=locals.inv_year%>"
+    min="1886"
+    max="2024"
   /><br />
 
   <label id="description">Description: </label><br />
@@ -76,5 +78,7 @@
     value="<%=locals.inv_color%>"
   /><br />
 
-  <input type="submit" value="Add Vehicle">
+  <%- classificationList %> <br />
+
+  <input type="submit" value="Add Vehicle" />
 </form>

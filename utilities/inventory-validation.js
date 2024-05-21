@@ -17,24 +17,107 @@ validate.addClassificationRules = () => {
   ];
 };
 
+validate.addInventoryRules = () => {
+  return [
+    body("inv_make")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide make."),
+
+    body("inv_model")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide model"),
+
+    body("inv_year")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ max: 4 })
+      .withMessage("Please provide year."),
+
+    body("inv_description")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide description"),
+
+    body("inv_price")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 3 })
+      .withMessage("Please provide price"),
+
+    body("inv_miles")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide miles"),
+  ];
+};
+
 /* ******************************
  * Check data and return errors or continue to classification
  * ***************************** */
 validate.checkRegData = async (req, res, next) => {
-    const { classification_name } = req.body;
-    let errors = [];
-    errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      let nav = await utilities.getNav();
-      res.render("./inventory/add-classification", {
-        errors,
-        title: "Add New Classification",
-        nav,
-        classification_name,
-      });
-      return;
-    }
-    next();
-  };
+  const { classification_name } = req.body;
+  let errors = [];
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    res.render("./inventory/add-classification", {
+      errors,
+      title: "Add New Classification",
+      nav,
+      classification_name,
+    });
+    return;
+  }
+  next();
+};
 
-  module.exports = validate;
+validate.checkInvData = async (req, res, next) => {
+  const {
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+  let errors = [];
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    res.render("./inventory/add-inventory", {
+      errors,
+      title: "Add New Vehicle",
+      nav,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
+    });
+    return;
+  }
+  next();
+};
+
+module.exports = validate;
