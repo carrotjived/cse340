@@ -3,81 +3,96 @@
 <%}else {res.redirect('/')} %>
 
 <form action="/inv/add-inventory" method="post" id="add-inventory">
-  <label id="make">Inventory Make: </label><br />
-  <input
-    type="text"
-    required
-    placeholder="What is the make?"
-    name="inv_make"
-    value="<%=locals.inv_make %>"
-  /><br />
+  <label id="make"
+    >Inventory Make: <br />
+    <input
+      type="text"
+      required
+      placeholder="What is the make?"
+      name="inv_make"
+      value="<%=locals.inv_make %>"
+    /><br />
+  </label>
 
-  <label id="model">Inventory Model: </label><br />
-  <input
-    type="text"
-    required
-    placeholder="What is the model? "
-    name="inv_model"
-    value="<%=locals.inv_model %>"
-  /><br />
+  <label id="model"
+    >Inventory Model: <br />
+    <input
+      type="text"
+      required
+      placeholder="What is the model? "
+      name="inv_model"
+      value="<%=locals.inv_model %>"
+    /><br />
+  </label>
+  <label id="year"
+    >Year: <br />
+    <input
+      type="number"
+      required
+      placeholder="Year"
+      name="inv_year"
+      value="<%=locals.inv_year%>"
+      min="1886"
+      max="2024"
+    /><br />
+  </label>
+  <label id="description"
+    >Description: <br />
+    <input
+      type="text"
+      required
+      placeholder="Description"
+      name="inv_description"
+      value="<%=locals.inv_description%>"
+    /><br />
+  </label>
 
-  <label id="year">Year: </label><br />
-  <input
-    type="number"
-    required
-    placeholder="Year"
-    name="inv_year"
-    value="<%=locals.inv_year%>"
-    min="1886"
-    max="2024"
-  /><br />
+  <label id="image"
+    >Choose Image File<br />
+    <input type="file" name="inv_image" accept="image/png, image/jpeg" /><br />
+  </label>
 
-  <label id="description">Description: </label><br />
-  <input
-    type="text"
-    required
-    placeholder="Description"
-    name="inv_description"
-    value="<%=locals.inv_description%>"
-  /><br />
+  <label id="thumbnail"
+    >Choose Thumbnail File<br />
+    <input
+      type="file"
+      name="inv_thumbnail"
+      accept="image/png, image/jpeg"
+    /><br />
+  </label>
 
-  <label id="image">Choose Image File</label><br />
-  <input type="file" name="inv_image" accept="image/png, image/jpeg" /><br />
+  <label id="price"
+    >Price: <br />
+    <input
+      type="number"
+      required
+      placeholder="Price"
+      name="inv_price"
+      value="<%=locals.inv_price%>"
+    /><br />
+  </label>
 
-  <label id="thumbnail">Choose Thumbnail File</label><br />
-  <input
-    type="file"
-    name="inv_thumbnail"
-    accept="image/png, image/jpeg"
-  /><br />
+  <label id="miles"
+    >Miles: <br />
+    <input
+      type="number"
+      required
+      placeholder="Miles"
+      name="inv_miles"
+      value="<%=locals.inv_miles%>"
+    /><br />
+  </label>
 
-  <label id="price">Price: </label><br />
-  <input
-    type="number"
-    required
-    placeholder="Price"
-    name="inv_price"
-    value="<%=locals.inv_price%>"
-  /><br />
-
-  <label id="miles">Miles: </label><br />
-  <input
-    type="number"
-    required
-    placeholder="Miles"
-    name="inv_miles"
-    value="<%=locals.inv_miles%>"
-  /><br />
-
-  <label id="color">Color: </label><br />
-  <input
-    type="text"
-    required
-    placeholder="Color"
-    name="inv_color"
-    value="<%=locals.inv_color%>"
-  /><br />
-
+  <label id="color"
+    >Color: <br />
+    <input
+      type="text"
+      required
+      placeholder="Color"
+      name="inv_color"
+      value="<%=locals.inv_color%>"
+    /><br />
+  </label>
   <%- classificationList %> <br />
 
   <input type="submit" value="Add Vehicle" />
