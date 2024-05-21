@@ -1,0 +1,80 @@
+<%if (title) { %>
+<h1><%= title %></h1>
+<%}else {res.redirect('/')} %>
+
+<form action="inv/add-inventory" method="post" id="add-inventory">
+  <label id="make">Inventory Make: </label><br />
+  <input
+    type="text"
+    required
+    placeholder="What is the make?"
+    name="inv_make"
+    value="<%=locals.inv_make %>"
+  /><br />
+
+  <label id="model">Inventory Model: </label><br />
+  <input
+    type="text"
+    required
+    placeholder="What is the model? "
+    name="inv_model"
+    value="<%=locals.inv_model %>"
+  /><br />
+
+  <label id="year">Year: </label><br />
+  <input
+    type="date"
+    required
+    placeholder="Year"
+    name="inv_year"
+    value="<%=locals.inv_year%>"
+  /><br />
+
+  <label id="description">Description: </label><br />
+  <input
+    type="text"
+    required
+    placeholder="Description"
+    name="inv_description"
+    value="<%=locals.inv_description%>"
+  /><br />
+
+  <label id="image">Choose Image File</label><br />
+  <input type="file" name="inv_image" accept="image/png, image/jpeg" /><br />
+
+  <label id="thumbnail">Choose Thumbnail File</label><br />
+  <input
+    type="file"
+    name="inv_thumbnail"
+    accept="image/png, image/jpeg"
+  /><br />
+
+  <label id="price">Price: </label><br />
+  <input
+    type="number"
+    required
+    placeholder="Price"
+    name="inv_price"
+    value="<%=locals.inv_price%>"
+  /><br />
+
+  <label id="miles">Miles: </label><br />
+  <input
+    type="number"
+    required
+    placeholder="Miles"
+    name="inv_miles"
+    value="<%=locals.inv_miles%>"
+  /><br />
+
+  <label id="color">Color: </label><br />
+  <input
+    type="text"
+    required
+    placeholder="Color"
+    name="inv_color"
+    value="<%=locals.inv_color%>"
+  /><br />
+
+  <input type="submit" value="Add Vehicle">
+</form>

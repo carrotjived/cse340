@@ -244,35 +244,57 @@ h1 {
   font-weight: bold;
 }
 
-/* Login Forms */
+/*Forms */
 
-#login {
+#login,
+#add-classification,
+#add-inventory {
   padding: 50px;
 }
 #login label,
-#login input,#register label,#register input{
+#login input,
+#register label,
+#register input,
+#add-classification label,
+#add-classification input,
+#add-inventory label,
+#add-inventory input {
   margin-bottom: 15px;
 }
 
-#login input,#register input {
+#login input,
+#register input ,#add-inventory input{
   width: 25%;
   padding: 10px;
 }
 
-#login label, #register label{
+#add-classification input {
+  width: 50%;
+  padding: 10px;
+}
+
+#login label,
+#register label,
+#add-classification label ,#add-inventory label{
   font-size: x-large;
   font-family: var(--other-font);
 }
 
-#login input[type="submit"],#register input[type="submit"]{
+#login input[type="submit"],
+#register input[type="submit"],
+#add-classification input[type="submit"],#add-inventory input[type="submit"] {
   font-size: large;
 }
 
-#login input:required ,#register input:required{
+#login input:required,
+#register input:required,
+#add-classification input:required, #add-inventory input:required{
   border-left: solid 6px black;
 }
 
-#login input:required:valid,#register input:required:valid {
+#login input:required:valid,
+#register input:required:valid,
+#add-classification input:required:valid, #add-inventory input:required:valid {
   border-left: solid 6px green;
 }
 
@@ -281,13 +303,14 @@ h1 {
   font-family: var(--other-font);
 }
 
-#register span,#login span {
+#register span,
+#login span,
+#add-classification span {
   font-style: italic;
   font-family: var(--other-font);
- 
 }
 
-.notice li{
+.notice li {
   list-style: none;
   color: red;
   padding: 10px;
@@ -387,7 +410,7 @@ h1 {
     padding: 10px;
   }
 
-  #register input {
+  #register input,#add-inventory input {
     width: 90%;
   }
 }

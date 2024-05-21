@@ -41,11 +41,28 @@ accountController.registerAccount = async function (req, res) {
     account_password,
   } = req.body;
 
+
+
+  let hashedPassword;
+  try {
+    hashedPassword = await bcrypt.hashSync(account_password, 10);
+  } catch (error) {
+    req.flash(
+      "notice",
+      "Sorry, there was an error processing the registration."
+    );
+    req.status(500).render("./account/register", {
+      title: "Registration",
+      nav,
+      errors: null,
+    });
+  }
+
   const regResult = await accountModel.registerAccount(
     account_firstname,
     account_lastname,
     account_email,
-    account_password
+    hashedPassword
   );
 
   if (regResult) {

@@ -42,8 +42,6 @@ app.use(
   })
 );
 
-
-
 // Express Messages Middleware
 app.use(require("connect-flash")());
 app.use(function (req, res, next) {
@@ -67,15 +65,32 @@ app.get(
   "/inv/type/",
   utilities.handleErrors(invControllers.buildByClassificationId)
 );
+
+//Inventory Route
 app.get(
   "/inv/details/",
   utilities.handleErrors(invControllers.buildByInventoryId)
 );
 
+//Error Route
 app.get("/error", utilities.handleErrors(baseController.throwError));
 
 //Account Route
 app.use("/account", accountRoute);
+
+//Management Route
+app.get("/inv/", utilities.handleErrors(invControllers.buildManagement));
+//Add Classification Route
+app.get(
+  "/inv/add-classification/",
+  utilities.handleErrors(invControllers.buildAddClassification)
+);
+
+//Add Vehicle Route
+app.get(
+  "/inv/add-inventory/",
+  utilities.handleErrors(invControllers.buildAddInventory)
+);
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
