@@ -91,10 +91,9 @@ accountController.accountLogin = async function (req, res) {
   let nav = await utilities.getNav();
   const { account_email, account_password } = req.body;
   const accountData = await accountModel.getAccountByEmail(account_email);
-  
   if (!accountData) {
     req.flash("notice", "Please check your credentials and try again.");
-    req.status(400).render("account/login", {
+    res.status(400).render("account/login", {
       title: "Login",
       nav,
       errors: null,
@@ -132,6 +131,7 @@ accountController.accountLogin = async function (req, res) {
 
 accountController.buildDefault = async function (req, res, next) {
   let nav = await utilities.getNav();
+  req.flash("notice", "You are logged in");
   res.render("account/management", {
     title: "Account Management",
     nav,

@@ -8,13 +8,13 @@
 </ul>
 <% }%> <%- messages() %>
 
-<form id="login" action="../account/login" method="post">
+<form id="login" action="/account/login" method="post">
   <label for="emailAddress">Email Address:</label><br />
   <input
     type="email"
     name="account_email"
     required
-    pattern="[a-zA-Z0-9_.\-]+@gmail.com"
+    pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
     placeholder="abc@gmail.com"
     title="A valid email address"
     value="<%=locals.account_email %>"
