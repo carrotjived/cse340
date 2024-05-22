@@ -35,4 +35,5 @@ router.post(
   Util.handleErrors(invController.addInventoryData)
 );
 
+
 module.exports = router;
