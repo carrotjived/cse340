@@ -173,7 +173,7 @@ invCont.modifyInventory = async function (req, res) {
   const inventory_id = parseInt(req.params.inventory_id);
   const invData = await invModel.getInventoryByInventoryId(inventory_id);
   const classificationSelect = await utilities.buildClassificationList(
-    invData.classification_id
+    invData[0].classification_id
   );
 
   const name = `${invData[0].inv_make} ${invData[0].inv_model}`;
@@ -184,17 +184,17 @@ invCont.modifyInventory = async function (req, res) {
     invData,
     classificationList: classificationSelect,
     errors: null,
-    inv_id: invData.inv_id,
-    inv_make: invData.inv_make,
-    inv_model: invData.inv_model,
-    inv_year: invData.inv_year,
-    inv_description: invData.inv_description,
-    inv_image: invData.inv_image,
-    inv_thumbnail: invData.inv_thumbnail,
-    inv_price: invData.inv_price,
-    inv_miles: invData.inv_miles,
-    inv_color: invData.inv_color,
-    classification_id: invData.classification_id,
+    inv_id: invData[0].inv_id,
+    inv_make: invData[0].inv_make,
+    inv_model: invData[0].inv_model,
+    inv_year: invData[0].inv_year,
+    inv_description: invData[0].inv_description,
+    inv_image: invData[0].inv_image,
+    inv_thumbnail: invData[0].inv_thumbnail,
+    inv_price: invData[0].inv_price,
+    inv_miles: invData[0].inv_miles,
+    inv_color: invData[0].inv_color,
+    classification_id: invData[0].classification_id,
   });
 };
 
@@ -203,6 +203,7 @@ invCont.modifyInventory = async function (req, res) {
  * ************************** */
 invCont.updateInventory = async function (req, res, next) {
   let nav = await utilities.getNav();
+
   const {
     inv_make,
     inv_model,
@@ -218,6 +219,7 @@ invCont.updateInventory = async function (req, res, next) {
   } = req.body;
 
   const updateResult = await invModel.updateInventory(
+    inv_id,
     inv_make,
     inv_model,
     inv_description,
@@ -227,8 +229,7 @@ invCont.updateInventory = async function (req, res, next) {
     inv_year,
     inv_miles,
     inv_color,
-    classification_id,
-    inv_id
+    classification_id
   );
 
   if (updateResult) {

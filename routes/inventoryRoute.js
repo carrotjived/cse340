@@ -29,10 +29,7 @@ router.get(
 );
 
 //Build Modify Inventory View from Management View
-router.get(
-  "/edit/:inventory_id",
-  Util.handleErrors(invController.modifyInventory)
-);
+router.get("/edit/:inventory_id", Util.handleErrors(invController.modifyInventory));
 
 router.get(
   "/getInventory/:classification_id",
