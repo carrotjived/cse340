@@ -258,7 +258,8 @@ h1 {
 #add-classification label,
 #add-classification input,
 #add-inventory label,
-#add-inventory input, #classificationList {
+#add-inventory input,
+#classificationList {
   margin-bottom: 15px;
 }
 
@@ -273,33 +274,38 @@ h1 {
   padding: 10px;
 }
 
-#add-inventory input,#classificationList {
+#add-inventory input,
+#classificationList {
   width: 35%;
   padding: 10px;
 }
 
 #login label,
 #register label,
-#add-classification label ,#add-inventory label{
+#add-classification label,
+#add-inventory label {
   font-size: x-large;
   font-family: var(--other-font);
 }
 
 #login input[type="submit"],
 #register input[type="submit"],
-#add-classification input[type="submit"],#add-inventory input[type="submit"] {
+#add-classification input[type="submit"],
+#add-inventory input[type="submit"] {
   font-size: large;
 }
 
 #login input:required,
 #register input:required,
-#add-classification input:required, #add-inventory input:required{
+#add-classification input:required,
+#add-inventory input:required {
   border-left: solid 6px black;
 }
 
 #login input:required:valid,
 #register input:required:valid,
-#add-classification input:required:valid, #add-inventory input:required:valid {
+#add-classification input:required:valid,
+#add-inventory input:required:valid {
   border-left: solid 6px green;
 }
 
@@ -325,12 +331,21 @@ h1 {
 
 #classificationList {
   font-family: var(--other-font);
-
 }
 
+#inventoryDisplay {
+  font-family: var(--other-font);
 
+  padding-left: 32%;
 
+}
+#inventoryDisplay td {
+  padding: 10px;
+}
 
+#inventoryDisplay th,#inventoryDisplay td{
+  border: 1px solid black;
+}
 
 @media screen and (max-width: 500px) {
   html {
@@ -422,8 +437,13 @@ h1 {
     padding: 10px;
   }
 
-  #register input,#add-inventory input {
+  #register input,
+  #add-inventory input {
     width: 90%;
+  }
+
+  #inventoryDisplay {
+    padding-left: 20%;
   }
 }
 
