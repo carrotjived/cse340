@@ -248,7 +248,7 @@ h1 {
 
 #login,
 #add-classification,
-#add-inventory {
+#add-inventory,#updateForm {
   padding: 50px;
 }
 #login label,
@@ -259,7 +259,8 @@ h1 {
 #add-classification input,
 #add-inventory label,
 #add-inventory input,
-#classificationList {
+#classificationList 
+#updateForm label, #updateForm input{
   margin-bottom: 15px;
 }
 
@@ -275,7 +276,7 @@ h1 {
 }
 
 #add-inventory input,
-#classificationList {
+#classificationList, #updateForm input{
   width: 35%;
   padding: 10px;
 }
@@ -283,7 +284,7 @@ h1 {
 #login label,
 #register label,
 #add-classification label,
-#add-inventory label {
+#add-inventory label, #updateForm label{
   font-size: x-large;
   font-family: var(--other-font);
 }
@@ -291,21 +292,21 @@ h1 {
 #login input[type="submit"],
 #register input[type="submit"],
 #add-classification input[type="submit"],
-#add-inventory input[type="submit"] {
+#add-inventory input[type="submit"], #updateForm input[type="submit"]{
   font-size: large;
 }
 
 #login input:required,
 #register input:required,
 #add-classification input:required,
-#add-inventory input:required {
+#add-inventory input:required, #updateForm input:required{
   border-left: solid 6px black;
 }
 
 #login input:required:valid,
 #register input:required:valid,
 #add-classification input:required:valid,
-#add-inventory input:required:valid {
+#add-inventory input:required:valid,#updateForm input:required:valid {
   border-left: solid 6px green;
 }
 
@@ -337,16 +338,24 @@ h1 {
   font-family: var(--other-font);
 
   padding-left: 32%;
-
 }
 #inventoryDisplay td {
   padding: 10px;
 }
 
-#inventoryDisplay th,#inventoryDisplay td{
+#inventoryDisplay th,
+#inventoryDisplay td {
   border: 1px solid black;
 }
 
+.addButtons {
+  background-color: black;
+  padding: 10px;
+  color: white;
+  font-family: var(--other-font);
+  border-radius: 15px;
+  text-decoration: none;
+}
 @media screen and (max-width: 500px) {
   html {
     background-image: none;
@@ -438,7 +447,7 @@ h1 {
   }
 
   #register input,
-  #add-inventory input {
+  #add-inventory input,#updateForm input{
     width: 90%;
   }
 

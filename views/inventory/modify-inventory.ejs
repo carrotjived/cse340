@@ -2,7 +2,7 @@
 <h1><%= title %></h1>
 <%}else {res.redirect('/')} %>
 
-<form action="/inv/update" method="post" id="add-inventory">
+<form action="/inv/update" method="post" id="updateForm">
   <label id="make"
     >Inventory Make: <br />
     <input
@@ -49,15 +49,15 @@
 
   <label id="image"
     >Choose Image File<br />
-    <input type="file" name="inv_image" accept="image/png, image/jpeg" /><br />
+    <input type="text" name="inv_image" placeholder="Image"  value="<%=locals.inv_image %>"/><br />
   </label>
 
   <label id="thumbnail"
     >Choose Thumbnail File<br />
     <input
-      type="file"
+      type="text"
       name="inv_thumbnail"
-      accept="image/png, image/jpeg"
+      value="<%=locals.inv_thumbnail %>"
     /><br />
   </label>
 
@@ -95,6 +95,8 @@
   </label>
   <%- classificationList %> <br />
 
-  <input type="submit" value="Update Vehicle" />
+  <input type="submit" value="Update Vehicle" id="submitUpdate" disabled/>
   <input type="hidden" name="inv_id"<% if(locals.inv_id) { %> value = "<%= locals.inv_id %>"<%}%>>
 </form>
+
+<script src="../../js/inv-update.js"></script>

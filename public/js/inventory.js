@@ -1,4 +1,4 @@
-"use strict";
+"use script";
 
 let classificationList = document.querySelector("#classificationList");
 classificationList.addEventListener("change", function () {

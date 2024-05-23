@@ -2,8 +2,10 @@
 <h1><%= title %></h1>
 <%}else {res.redirect('/')} %> <%- messages() %>
 
-<a href="../inv/add-classification">Add New Classification</a><br />
-<a href="../inv/add-inventory">Add New Vehicle</a>
+<a href="../inv/add-classification" class="addButtons"
+  >Add New Classification</a
+>
+<a href="../inv/add-inventory" class="addButtons">Add New Vehicle</a>
 
 <h2>Manage Inventory</h2>
 <p>Select Classification</p>
