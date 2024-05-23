@@ -29,11 +29,20 @@ router.get(
 );
 
 //Build Modify Inventory View from Management View
-router.get("/edit/:inventory_id", Util.handleErrors(invController.modifyInventory));
+router.get(
+  "/edit/:inventory_id",
+  Util.handleErrors(invController.modifyInventory)
+);
 
 router.get(
   "/getInventory/:classification_id",
   Util.handleErrors(invController.getInventoryJSON)
+);
+
+//Build Delete View From Management View
+router.get(
+  "/delete/:inventory_id",
+  Util.handleErrors(invController.deleteView)
 );
 
 //Add New Classification
@@ -59,5 +68,8 @@ router.post(
   validate.checkUpdateData,
   Util.handleErrors(invController.updateInventory)
 );
+
+//Delete Inventory
+router.post("/delete/", Util.handleErrors(invController.deleteInventory))
 
 module.exports = router;

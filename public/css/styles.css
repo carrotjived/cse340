@@ -248,7 +248,7 @@ h1 {
 
 #login,
 #add-classification,
-#add-inventory,#updateForm {
+#add-inventory,#updateForm, #deleteForm {
   padding: 50px;
 }
 #login label,
@@ -260,7 +260,7 @@ h1 {
 #add-inventory label,
 #add-inventory input,
 #classificationList 
-#updateForm label, #updateForm input{
+#updateForm label, #updateForm input, #deleteForm input, #deleteForm label{
   margin-bottom: 15px;
 }
 
@@ -276,7 +276,7 @@ h1 {
 }
 
 #add-inventory input,
-#classificationList, #updateForm input{
+#classificationList, #updateForm input, #deleteForm input{
   width: 35%;
   padding: 10px;
 }
@@ -284,7 +284,7 @@ h1 {
 #login label,
 #register label,
 #add-classification label,
-#add-inventory label, #updateForm label{
+#add-inventory label, #updateForm label, #deleteForm label{
   font-size: x-large;
   font-family: var(--other-font);
 }
@@ -292,21 +292,21 @@ h1 {
 #login input[type="submit"],
 #register input[type="submit"],
 #add-classification input[type="submit"],
-#add-inventory input[type="submit"], #updateForm input[type="submit"]{
+#add-inventory input[type="submit"], #updateForm input[type="submit"], #deleteForm input[type="submit"]{
   font-size: large;
 }
 
 #login input:required,
 #register input:required,
 #add-classification input:required,
-#add-inventory input:required, #updateForm input:required{
+#add-inventory input:required, #updateForm input:required,#deleteForm input:required{
   border-left: solid 6px black;
 }
 
 #login input:required:valid,
 #register input:required:valid,
 #add-classification input:required:valid,
-#add-inventory input:required:valid,#updateForm input:required:valid {
+#add-inventory input:required:valid,#updateForm input:required:valid, #deleteForm input:required:valid {
   border-left: solid 6px green;
 }
 
@@ -355,6 +355,12 @@ h1 {
   font-family: var(--other-font);
   border-radius: 15px;
   text-decoration: none;
+}
+
+#deleteForm p {
+  font-family: var(--heading-font);
+  font-weight: bolder;
+  font-size: larger;
 }
 @media screen and (max-width: 500px) {
   html {

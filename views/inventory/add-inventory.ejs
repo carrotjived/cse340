@@ -49,16 +49,12 @@
 
   <label id="image"
     >Choose Image File<br />
-    <input type="file" name="inv_image" accept="image/png, image/jpeg" /><br />
+    <input type="text" name="inv_image" /><br />
   </label>
 
   <label id="thumbnail"
     >Choose Thumbnail File<br />
-    <input
-      type="file"
-      name="inv_thumbnail"
-      accept="image/png, image/jpeg"
-    /><br />
+    <input type="text" name="inv_thumbnail" /><br />
   </label>
 
   <label id="price"
@@ -93,7 +89,7 @@
       value="<%=locals.inv_color %>"
     /><br />
   </label>
-  <%- classificationList %> <br />
+  <%- classificationSelect %> <br />
 
   <input type="submit" value="Add Vehicle" />
 </form>
