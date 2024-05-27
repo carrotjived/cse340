@@ -248,7 +248,9 @@ h1 {
 
 #login,
 #add-classification,
-#add-inventory,#updateForm, #deleteForm {
+#add-inventory,
+#updateForm,
+#deleteForm {
   padding: 50px;
 }
 #login label,
@@ -259,8 +261,10 @@ h1 {
 #add-classification input,
 #add-inventory label,
 #add-inventory input,
-#classificationList 
-#updateForm label, #updateForm input, #deleteForm input, #deleteForm label{
+#classificationList #updateForm label,
+#updateForm input,
+#deleteForm input,
+#deleteForm label {
   margin-bottom: 15px;
 }
 
@@ -276,7 +280,9 @@ h1 {
 }
 
 #add-inventory input,
-#classificationList, #updateForm input, #deleteForm input{
+#classificationList,
+#updateForm input,
+#deleteForm input {
   width: 35%;
   padding: 10px;
 }
@@ -284,7 +290,9 @@ h1 {
 #login label,
 #register label,
 #add-classification label,
-#add-inventory label, #updateForm label, #deleteForm label{
+#add-inventory label,
+#updateForm label,
+#deleteForm label {
   font-size: x-large;
   font-family: var(--other-font);
 }
@@ -292,21 +300,27 @@ h1 {
 #login input[type="submit"],
 #register input[type="submit"],
 #add-classification input[type="submit"],
-#add-inventory input[type="submit"], #updateForm input[type="submit"], #deleteForm input[type="submit"]{
+#add-inventory input[type="submit"],
+#updateForm input[type="submit"],
+#deleteForm input[type="submit"] {
   font-size: large;
 }
 
 #login input:required,
 #register input:required,
 #add-classification input:required,
-#add-inventory input:required, #updateForm input:required,#deleteForm input:required{
+#add-inventory input:required,
+#updateForm input:required,
+#deleteForm input:required {
   border-left: solid 6px black;
 }
 
 #login input:required:valid,
 #register input:required:valid,
 #add-classification input:required:valid,
-#add-inventory input:required:valid,#updateForm input:required:valid, #deleteForm input:required:valid {
+#add-inventory input:required:valid,
+#updateForm input:required:valid,
+#deleteForm input:required:valid {
   border-left: solid 6px green;
 }
 
@@ -336,8 +350,14 @@ h1 {
 
 #inventoryDisplay {
   font-family: var(--other-font);
+  width: 100%;
+  padding-left: 20%;
+  padding-right: 20%;
+  margin-top: 10px;
+}
 
-  padding-left: 32%;
+#inventoryDisplay a {
+  text-decoration: none;
 }
 #inventoryDisplay td {
   padding: 10px;
@@ -453,12 +473,26 @@ h1 {
   }
 
   #register input,
-  #add-inventory input,#updateForm input{
+  #add-inventory input,
+  #updateForm input,#deleteForm input {
     width: 90%;
   }
 
   #inventoryDisplay {
-    padding-left: 20%;
+    width: 100%;
+    padding-left: 0;
+  }
+
+  #add-classification span {
+    font-size: medium;
+  }
+
+  #add-classification input {
+    width: 70%;
+  }
+
+  #classificationList {
+    width: 70%;
   }
 }
 
@@ -507,5 +541,14 @@ h1 {
 
   #item-display {
     flex-direction: column;
+  }
+
+  #deleteForm input{
+    width: 100%;
+  }
+
+  #inventoryDisplay {
+    width: 100%;
+    padding-left: 0;
   }
 }

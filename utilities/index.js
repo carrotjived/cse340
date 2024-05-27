@@ -1,3 +1,4 @@
+const { header } = require("express-validator");
 const invModel = require("../models/inventory-model");
 const Util = {};
 const jwt = require("jsonwebtoken");
@@ -149,7 +150,7 @@ Util.buildClassificationList = async function (classification_id = null) {
   let data = await invModel.getClassifications();
   let classificationList =
     '<select name="classification_id" id="classificationList" required>';
-  classificationList += "<option value=''>Choose a Classification</option";
+  classificationList += "<option value=''>Choose a Classification</option>";
   data.rows.forEach((row) => {
     classificationList += '<option value="' + row.classification_id + '"';
     if (
@@ -180,6 +181,10 @@ Util.checkJWToken = (req, res, next) => {
         }
         res.locals.accountData = accountData;
         res.locals.loggedin = 1;
+        res.locals.firstName = accountData.account_firstname;
+        res.locals.accountType = accountData.account_type;
+        res.locals.accountID = accountData.account_id;
+
         next();
       }
     );
@@ -192,12 +197,34 @@ Util.checkJWToken = (req, res, next) => {
  *  Check Login
  * ************************************ */
 Util.checkLogin = (req, res, next) => {
-  if (res.locals.loggedin){
-    next()
+  if (res.locals.loggedin) {
+    next();
   } else {
-    req.flash("notice", "Please log in.")
-    return res.redirect("/account/login")
+    req.flash("notice", "Please log in.");
+    return res.redirect("/account/login");
   }
-}
+};
+
+/* ****************************************
+ *Hide My Account and show Logout
+ **************************************** */
+
+Util.showHeader = (loggedin) => {
+  if (loggedin) {
+    let header =
+      '<a title="Logout" href="/account/logout" id="logout"><h2>Logout</h2></a>';
+    header +=
+      '<a title="Management View" href="/account/" id="welcomeBasic"><h2>Welcome Basic</h2></a>';
+    return header;
+  } else {
+    let header =
+      '<a title="Click to log in" href="/account/login" id="myAccount"><h2>My Account</h2></a>';
+    return header;
+  }
+};
+
+/* ****************************************
+ *Hide My Account and show Logout
+ **************************************** */
 
 module.exports = Util;

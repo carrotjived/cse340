@@ -10,9 +10,12 @@ require("dotenv").config();
  * *************************************** */
 accountController.buildLogin = async function (req, res, next) {
   let nav = await utilities.getNav();
+  const header = utilities.showHeader(res.locals.loggedin);
   res.render("account/login", {
     title: "Login",
     nav,
+    header,
+
     errors: null,
   });
 };
@@ -23,9 +26,11 @@ accountController.buildLogin = async function (req, res, next) {
 
 accountController.buildRegister = async function (req, res, next) {
   let nav = await utilities.getNav();
+
   res.render("account/register", {
     title: "Register",
     nav,
+    header,
     errors: null,
   });
 };
@@ -36,6 +41,7 @@ accountController.buildRegister = async function (req, res, next) {
 
 accountController.registerAccount = async function (req, res) {
   let nav = await utilities.getNav();
+  const header = utilities.showHeader(res.locals.loggedin);
   const {
     account_firstname,
     account_lastname,
@@ -54,6 +60,7 @@ accountController.registerAccount = async function (req, res) {
     req.status(500).render("account/register", {
       title: "Registration",
       nav,
+      header,
       errors: null,
     });
   }
@@ -73,6 +80,7 @@ accountController.registerAccount = async function (req, res) {
     res.status(201).render("account/login", {
       title: "Login",
       nav,
+      header,
       errors: null,
     });
   } else {
@@ -80,6 +88,7 @@ accountController.registerAccount = async function (req, res) {
     res.status(501).render("account/register", {
       title: "Registration",
       nav,
+      header,
     });
   }
 };
@@ -89,6 +98,7 @@ accountController.registerAccount = async function (req, res) {
  * ************************************ */
 accountController.accountLogin = async function (req, res) {
   let nav = await utilities.getNav();
+  const header = utilities.showHeader(res.locals.loggedin);
   const { account_email, account_password } = req.body;
   const accountData = await accountModel.getAccountByEmail(account_email);
   if (!accountData) {
@@ -96,6 +106,7 @@ accountController.accountLogin = async function (req, res) {
     res.status(400).render("account/login", {
       title: "Login",
       nav,
+      header,
       errors: null,
       account_email,
     });
@@ -131,10 +142,12 @@ accountController.accountLogin = async function (req, res) {
 
 accountController.buildDefault = async function (req, res, next) {
   let nav = await utilities.getNav();
-  req.flash("notice", "You are logged in");
+  const header = utilities.showHeader(res.locals.loggedin);
+  req.flash("notice", "You are logged in as ");
   res.render("account/management", {
     title: "Account Management",
     nav,
+    header,
     errors: null,
   });
 };
