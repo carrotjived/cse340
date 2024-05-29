@@ -3,6 +3,7 @@ const invModel = require("../models/inventory-model");
 const Util = {};
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const accountModel = require("../models/account-model");
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -181,9 +182,11 @@ Util.checkJWToken = (req, res, next) => {
         }
         res.locals.accountData = accountData;
         res.locals.loggedin = 1;
-        res.locals.firstName = accountData.account_firstname;
-        res.locals.accountType = accountData.account_type;
-        res.locals.accountID = accountData.account_id;
+        res.locals.account_firstname = accountData.account_firstname;
+        res.locals.account_lastname = accountData.account_lastname;
+        res.locals.account_email = accountData.account_email;
+        res.locals.account_type = accountData.account_type;
+        res.locals.account_id = accountData.account_id;
 
         next();
       }
@@ -209,12 +212,14 @@ Util.checkLogin = (req, res, next) => {
  *Hide My Account and show Logout
  **************************************** */
 
-Util.showHeader = (loggedin) => {
+Util.showHeader = async function (loggedin, accountId) {
   if (loggedin) {
+    let accountData = await accountModel.getAccountById(accountId);
+    let firstName = accountData.account_firstname;
+
     let header =
-      '<a title="Logout" href="/account/logout" id="logout"><h2>Logout</h2></a>';
-    header +=
-      '<a title="Management View" href="/account/" id="welcomeBasic"><h2>Welcome Basic</h2></a>';
+      '<h2><a title="Logout" href="/account/logout" id="logout">Logout</a></h2>';
+    header += `<h2><a title="Management View" href="/account/" id="welcomeBasic">Welcome ${firstName}</a></h2>`;
     return header;
   } else {
     let header =
@@ -224,7 +229,32 @@ Util.showHeader = (loggedin) => {
 };
 
 /* ****************************************
- *Hide My Account and show Logout
+ *Welcome Message
  **************************************** */
+Util.welcomeMessage = async function (accountType, account_id) {
+  let accountData = await accountModel.getAccountById(account_id);
+  if (accountType == "Employee" || accountType == "Admin") {
+    let welcome = `<h2 id="welcomeName">Welcome ${accountData.account_firstname}!`;
+    welcome +=
+      '<p><a href="/account/update" id="updateButton">Update Contact Information</a></p>';
+    welcome += "<h3>Manage Inventory</h3>";
+    welcome +=
+      "<p><a href='/inv/' title='See Inventory Management View' id='viewInventory'>View</a></p>";
+
+    return welcome;
+  } else {
+    let welcome = `<h2>Welcome ${accountData.account_firstname}!`;
+    welcome +=
+      '<p><a href="/account/update" id="updateButton">Update Contact Information</a></p>';
+    return welcome;
+  }
+};
+
+/* **************************************
+ *Validate Email
+ * ************************************ */
+Util.findEmail = (account_email, emailArray) => {
+  return emailArray.find((email) => email.account_email === account_email);
+};
 
 module.exports = Util;

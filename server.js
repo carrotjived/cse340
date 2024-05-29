@@ -62,38 +62,54 @@ app.use(utilities.checkJWToken);
  *************************/
 app.use(static);
 // Inventory routes
-app.use("/inv", inventoryRoute);
+app.use("/inv", utilities.checkJWToken, inventoryRoute);
 //Index Route
 // app.get("/", utilities.handleErrors(baseController.buildHome));
-app.get("/", utilities.handleErrors(baseController.buildHome));
+app.get(
+  "/",
+  utilities.checkJWToken,
+  utilities.handleErrors(baseController.buildHome)
+);
 app.get(
   "/inv/type/",
+  utilities.checkJWToken,
   utilities.handleErrors(invControllers.buildByClassificationId)
 );
 
 //Inventory Route
 app.get(
   "/inv/details/",
+  utilities.checkJWToken,
   utilities.handleErrors(invControllers.buildByInventoryId)
 );
 
 //Error Route
-app.get("/error", utilities.handleErrors(baseController.throwError));
+app.get(
+  "/error",
+  utilities.checkJWToken,
+  utilities.handleErrors(baseController.throwError)
+);
 
 //Account Route
-app.use("/account", accountRoute);
+app.use("/account", utilities.checkJWToken, accountRoute);
 
 //Management Route
-app.get("/inv/", utilities.handleErrors(invControllers.buildManagement));
+app.get(
+  "/inv/",
+  utilities.checkJWToken,
+  utilities.handleErrors(invControllers.buildManagement)
+);
 //Add Classification Route
 app.get(
   "/inv/add-classification/",
+  utilities.checkJWToken,
   utilities.handleErrors(invControllers.buildAddClassification)
 );
 
 //Add Vehicle Route
 app.get(
   "/inv/add-inventory/",
+  utilities.checkJWToken,
   utilities.handleErrors(invControllers.buildAddInventory)
 );
 
@@ -109,8 +125,13 @@ app.use(async (req, res, next) => {
  *************************/
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav();
+  let header = await utilities.showHeader(
+    res.locals.loggedin,
+    res.locals.account_id
+  );
 
   console.error(`Error at: "${req.originalUrl}": ${err.message}`);
+
   if (err.status == 404) {
     message = err.message;
   } else {
@@ -120,7 +141,7 @@ app.use(async (err, req, res, next) => {
     title: err.status || "Server Error",
     message,
     nav,
-    header: null,
+    header,
   });
 });
 

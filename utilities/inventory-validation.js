@@ -84,6 +84,13 @@ validate.checkRegData = async (req, res, next) => {
 };
 
 validate.checkInvData = async (req, res, next) => {
+  
+  let header = await utilities.showHeader(
+    res.locals.loggedin,
+    res.locals.account_id
+  );
+
+  const classificationSelect = await utilities.buildClassificationList();
   const {
     inv_make,
     inv_model,
@@ -96,14 +103,19 @@ validate.checkInvData = async (req, res, next) => {
     inv_color,
     classification_id,
   } = req.body;
+  
+  console.log(req.body);
   let errors = [];
   errors = validationResult(req);
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav();
+    req.flash("notice", "Invalid Parameters");
     res.render("./inventory/add-inventory", {
       errors,
       title: "Add New Vehicle",
       nav,
+      header,
+      classificationSelect,
       inv_make,
       inv_model,
       inv_year,

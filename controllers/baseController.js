@@ -6,7 +6,11 @@ require("dotenv").config();
 baseController.buildHome = async function (req, res) {
   const nav = await utilities.getNav();
   console.log(res.locals);
-  const header = utilities.showHeader(res.locals.loggedin);
+  console.log(req.cookies);
+  let header = await utilities.showHeader(
+    res.locals.loggedin,
+    res.locals.account_id
+  );
   res.render("index", {
     title: "Home",
     nav,

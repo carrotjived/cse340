@@ -11,7 +11,10 @@ invCont.buildByClassificationId = async function (req, res, next) {
   const data = await invModel.getInventoryByClassificationId(classification_id);
   const grid = await utilities.buildClassificationGrid(data);
   let nav = await utilities.getNav();
-  const header = utilities.showHeader(res.locals.loggedin);
+  let header = await utilities.showHeader(
+    res.locals.loggedin,
+    res.locals.account_id
+  );
   const className = data[0].classification_name;
   res.render("inventory/classification", {
     title: className + " vehicles",
@@ -29,7 +32,10 @@ invCont.buildByInventoryId = async function (req, res, next) {
   const data = await invModel.getInventoryByInventoryId(inventory_id);
   const details = await utilities.buildItemInventoryGrid(data);
   let nav = await utilities.getNav();
-  const header = utilities.showHeader(res.locals.loggedin);
+  let header = await utilities.showHeader(
+    res.locals.loggedin,
+    res.locals.account_id
+  );
   const carYear = data[0].inv_year;
   const carMake = data[0].inv_make;
   const carModel = data[0].inv_model;
@@ -46,13 +52,15 @@ invCont.buildByInventoryId = async function (req, res, next) {
  * ************************** */
 invCont.buildManagement = async function (req, res) {
   let nav = await utilities.getNav();
-  const header = utilities.showHeader(res.locals.loggedin);
+  let header = await utilities.showHeader(
+    res.locals.loggedin,
+    res.locals.account_id
+  );
   const classificationSelect = await utilities.buildClassificationList();
   if (
-    res.locals.accountType == "Employee" ||
-    res.locals.accountyType == "Manager"
+    res.locals.account_type == "Employee" ||
+    res.locals.account_type == "Admin"
   ) {
-    req.flash("notice", `Welcome back ${res.locals.firstName}!`);
     res.render("inventory/management", {
       title: "Vehicle Management",
       nav,
@@ -62,6 +70,12 @@ invCont.buildManagement = async function (req, res) {
     });
   } else {
     req.flash("notice", "Access Denied. Please Log-in the right credentials");
+    res.status(400).render("account/login", {
+      title: "Login",
+      nav,
+      header,
+      errors: null,
+    });
   }
 };
 
@@ -70,7 +84,10 @@ invCont.buildManagement = async function (req, res) {
  * ************************** */
 invCont.buildAddClassification = async function (req, res) {
   let nav = await utilities.getNav();
-  const header = utilities.showHeader(res.locals.loggedin);
+  let header = await utilities.showHeader(
+    res.locals.loggedin,
+    res.locals.account_id
+  );
   res.render("inventory/add-classification", {
     title: "Add New Classification",
     nav,
@@ -84,7 +101,10 @@ invCont.addClassification = async function (req, res) {
   console.log(classification_name);
   const addData = await invModel.addClassification(classification_name);
   let nav = await utilities.getNav();
-  const header = utilities.showHeader(res.locals.loggedin);
+  let header = await utilities.showHeader(
+    res.locals.loggedin,
+    res.locals.account_id
+  );
 
   if (addData) {
     req.flash("notice", "Classification added.");
@@ -99,7 +119,7 @@ invCont.addClassification = async function (req, res) {
     res.status(501).render("inventory/add-classification", {
       title: "Add New Classification",
       nav,
-      header: null,
+      header,
     });
   }
 };
@@ -111,10 +131,11 @@ invCont.buildAddInventory = async function (req, res) {
   let nav = await utilities.getNav();
   const classification_id = req.params.classification_id;
   console.log(classification_id);
-  const classificationSelect = await utilities.buildClassificationList(
-    classification_id
+  const classificationSelect = await utilities.buildClassificationList();
+  let header = await utilities.showHeader(
+    res.locals.loggedin,
+    res.locals.account_id
   );
-  const header = utilities.showHeader(res.locals.loggedin);
   res.render("inventory/add-inventory", {
     title: "Add New Vehicles",
     nav,
@@ -129,8 +150,11 @@ invCont.buildAddInventory = async function (req, res) {
 
 invCont.addInventoryData = async function (req, res) {
   let nav = await utilities.getNav();
-  const header = utilities.showHeader(res.locals.loggedin);
-  const classificationSelect = await utilities.buildClassificationList();
+  let header = await utilities.showHeader(
+    res.locals.loggedin,
+    res.locals.account_id
+  );
+
   const {
     inv_make,
     inv_model,
@@ -143,7 +167,7 @@ invCont.addInventoryData = async function (req, res) {
     inv_color,
     classification_id,
   } = req.body;
-
+  const classificationSelect = await utilities.buildClassificationList();
   const addInventoryData = await invModel.addInventory(
     inv_make,
     inv_model,
@@ -162,7 +186,7 @@ invCont.addInventoryData = async function (req, res) {
     res.status(201).render("inventory/management", {
       title: "Vehicle Management",
       nav,
-      header: null,
+      header,
       errors: null,
       classificationSelect,
     });
@@ -172,6 +196,7 @@ invCont.addInventoryData = async function (req, res) {
       title: "Add New Vehicle",
       nav,
       header,
+      classificationSelect,
     });
   }
 };
@@ -196,7 +221,10 @@ invCont.getInventoryJSON = async (req, res, next) => {
  * ************************** */
 invCont.modifyInventory = async function (req, res) {
   let nav = await utilities.getNav();
-  const header = utilities.showHeader(res.locals.loggedin);
+  let header = await utilities.showHeader(
+    res.locals.loggedin,
+    res.locals.account_id
+  );
   const inventory_id = parseInt(req.params.inventory_id);
   const invData = await invModel.getInventoryByInventoryId(inventory_id);
   const classificationSelect = await utilities.buildClassificationList(
@@ -231,7 +259,10 @@ invCont.modifyInventory = async function (req, res) {
  * ************************** */
 invCont.updateInventory = async function (req, res, next) {
   let nav = await utilities.getNav();
-  const header = utilities.showHeader(res.locals.loggedin);
+  let header = await utilities.showHeader(
+    res.locals.loggedin,
+    res.locals.account_id
+  );
 
   const {
     inv_make,
@@ -298,7 +329,10 @@ invCont.updateInventory = async function (req, res, next) {
 
 invCont.deleteView = async function (req, res) {
   let nav = await utilities.getNav();
-  const header = utilities.showHeader(res.locals.loggedin);
+  let header = await utilities.showHeader(
+    res.locals.loggedin,
+    res.locals.account_id
+  );
   const inventory_id = parseInt(req.params.inventory_id);
   const invData = await invModel.getInventoryByInventoryId(inventory_id);
 
@@ -323,7 +357,10 @@ invCont.deleteView = async function (req, res) {
  * ************************** */
 invCont.deleteInventory = async function (req, res, next) {
   let nav = await utilities.getNav();
-  const header = utilities.showHeader(res.locals.loggedin);
+  let header = await utilities.showHeader(
+    res.locals.loggedin,
+    res.locals.account_id
+  );
 
   const { inv_id } = req.body;
   console.log(inv_id);

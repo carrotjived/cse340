@@ -9,7 +9,7 @@
 <% } %>
 
 <form action="/inv/add-classification" method="post" id="add-classification">
-  <label for="classification-name" id="classification-name"
+  <label for="classification-name" id="classification-label"
     >Classification Name: <br />
     <span>(Name must be alphabetical characters only)</span><br />
     <input
@@ -17,7 +17,8 @@
       required
       pattern="[A-Za-z]+"
       placeholder="Classification"
-      name="classification_name" /></label
+      name="classification_name"
+      id="classification-name" /></label
   ><br />
   <input type="submit" value="Add Classification" />
 </form>

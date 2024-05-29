@@ -250,7 +250,9 @@ h1 {
 #add-classification,
 #add-inventory,
 #updateForm,
-#deleteForm {
+#deleteForm,
+#updateAccount,
+#updatePassword {
   padding: 50px;
 }
 #login label,
@@ -264,7 +266,11 @@ h1 {
 #classificationList #updateForm label,
 #updateForm input,
 #deleteForm input,
-#deleteForm label {
+#deleteForm label,
+#updateAccount label,
+#updatepassword label,
+#updateAccount input,
+#updatePassword input {
   margin-bottom: 15px;
 }
 
@@ -282,7 +288,9 @@ h1 {
 #add-inventory input,
 #classificationList,
 #updateForm input,
-#deleteForm input {
+#deleteForm input,
+#updateAccount input,
+#updatePassword input {
   width: 35%;
   padding: 10px;
 }
@@ -292,7 +300,9 @@ h1 {
 #add-classification label,
 #add-inventory label,
 #updateForm label,
-#deleteForm label {
+#deleteForm label,
+#updateAccount label,
+#updatePassword label {
   font-size: x-large;
   font-family: var(--other-font);
 }
@@ -302,7 +312,9 @@ h1 {
 #add-classification input[type="submit"],
 #add-inventory input[type="submit"],
 #updateForm input[type="submit"],
-#deleteForm input[type="submit"] {
+#deleteForm input[type="submit"],
+#updateAccount input[type="submit"],
+#updatePassword input[type="submit"] {
   font-size: large;
 }
 
@@ -311,7 +323,9 @@ h1 {
 #add-classification input:required,
 #add-inventory input:required,
 #updateForm input:required,
-#deleteForm input:required {
+#deleteForm input:required,
+#updateAccount input:required,
+#updatePassword input:required {
   border-left: solid 6px black;
 }
 
@@ -320,7 +334,9 @@ h1 {
 #add-classification input:required:valid,
 #add-inventory input:required:valid,
 #updateForm input:required:valid,
-#deleteForm input:required:valid {
+#deleteForm input:required:valid,
+#updateAccount input:required:valid,
+#updatePassword input:required:valid {
   border-left: solid 6px green;
 }
 
@@ -331,7 +347,8 @@ h1 {
 
 #register span,
 #login span,
-#add-classification span {
+#add-classification span,
+#updatePassword span {
   font-style: italic;
   font-family: var(--other-font);
 }
@@ -382,6 +399,45 @@ h1 {
   font-weight: bolder;
   font-size: larger;
 }
+
+#updateButton,
+#viewInventory {
+  text-decoration: none;
+  background-color: black;
+  color: white;
+  padding: 15px;
+  border-radius: 15px;
+  font-family: var(--other-font);
+}
+
+#updateButton:hover,
+#viewInventory:hover {
+  background-color: white;
+  color: black;
+  border: black solid 3px;
+}
+
+#welcomeName {
+  font-family: var(--heading-font);
+}
+
+h3 {
+  font-family: var(--heading-font);
+}
+
+#logout,
+#welcomeBasic {
+  font-family: var(--heading-font);
+}
+
+#logout:hover,
+#welcomeBasic:hover {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 15px;
+}
+
 @media screen and (max-width: 500px) {
   html {
     background-image: none;
@@ -474,7 +530,10 @@ h1 {
 
   #register input,
   #add-inventory input,
-  #updateForm input,#deleteForm input {
+  #updateForm input,
+  #deleteForm input,
+  #updateAccount input,
+  #updatePassword input {
     width: 90%;
   }
 
@@ -483,7 +542,9 @@ h1 {
     padding-left: 0;
   }
 
-  #add-classification span {
+  #add-classification span,
+  #updatePassword span,
+  #updatePassword span {
     font-size: medium;
   }
 
@@ -543,7 +604,9 @@ h1 {
     flex-direction: column;
   }
 
-  #deleteForm input{
+  #deleteForm input,
+  #updateAccount input,
+  #updatePassword input {
     width: 100%;
   }
 

@@ -61,10 +61,15 @@ validate.checkRegData = async (req, res, next) => {
   errors = validationResult(req);
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav();
+    let header = await utilities.showHeader(
+      res.locals.loggedin,
+      res.locals.account_id
+    );
     res.render("./account/register", {
       errors,
       title: "Registration",
       nav,
+      header,
       account_firstname,
       account_lastname,
       account_email,
