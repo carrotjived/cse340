@@ -56,5 +56,7 @@ router.post(
   utilities.handleErrors(accountController.updatePassword)
 );
 
-router.get("/logout", utilities.handleErrors(accountController.logout))
+router.get("/edit/:review_id", utilities.handleErrors(accountController.buildEdit))
+
+router.get("/logout", utilities.handleErrors(accountController.logout));
 module.exports = router;

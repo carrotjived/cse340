@@ -1,5 +1,32 @@
 <%if (title) { %>
 <h1><%= title %></h1>
-<%}else {res.redirect('/')} %>
+<%}else {res.redirect('/')} %> <%- details %>
+<h2 id="reviewHeading">Customer Reviews</h2>
+<%- reviews%> <%# dropReview%> <% if (!locals.loggedin){ %>
+<h2 class="addReviewLabel">Add your own review</h2>
+<p class="reviewLogin">
+  You must
+  <a href="/account/login" title="Click to login" id="review-loginLink"
+    >login</a
+  >
+  to write a review
+</p>
+<% } else { const screenName =
+locals.account_firstname[0]+locals.account_lastname %> <%- messages()%>
 
-<%- details %>
+<form action="/inv/addReview" method="post" id="reviewForm">
+  <label for="screenName"
+    >Screen Name:
+
+    <input name="screenname" id="screenname" value="<%- screenName %>" readonly
+  /></label>
+
+  <label for="review">Review: </label>
+  <textarea name="review_text" id="review" rows="5" required></textarea>
+  <input type="hidden" name="account_id" value="<%- locals.account_id %>" />
+
+  <input type="hidden" name="inv_id" value="<%- locals.inv_id %>" />
+
+  <input type="submit" value="Add New Review" />
+</form>
+<% } %>

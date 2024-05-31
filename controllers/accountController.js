@@ -159,6 +159,11 @@ accountController.buildDefault = async function (req, res, next) {
     res.locals.loggedin,
     res.locals.account_id
   );
+  let reviewData = await accountModel.getReviews(res.locals.account_id);
+
+  console.log(reviewData);
+  let reviews = await utilities.displayReview(reviewData);
+
   if (res.locals.loggedin) {
     let welcome = await utilities.welcomeMessage(
       res.locals.account_type,
@@ -174,6 +179,7 @@ accountController.buildDefault = async function (req, res, next) {
         nav,
         header,
         welcome,
+        reviews,
         errors: null,
       });
     } else {
@@ -182,6 +188,7 @@ accountController.buildDefault = async function (req, res, next) {
         nav,
         header,
         welcome,
+        reviews,
         errors: null,
       });
     }
@@ -345,7 +352,41 @@ accountController.updatePassword = async function (req, res, next) {
  * ************************************ */
 accountController.logout = async function (req, res, next) {
   res.clearCookie("jwt");
+  res.locals.loggedin = "";
   return res.redirect("/");
 };
 
+/* **************************************
+ * Build the edit review view
+ * ************************************ */
+
+accountController.buildEdit = async function (req, res, next) {
+  if (res.locals.loggedin) {
+    let nav = await utilities.getNav();
+    let header = await utilities.showHeader(
+      res.locals.loggedin,
+      res.locals.account_id
+    );
+    const review_id = parseInt(req.params.review_id);
+    let reviewData = await accountModel.getSpecificReview(review_id);
+    console.log(reviewData);
+    res.locals.review_text = reviewData.review_text;
+    res.locals.review_id = reviewData.review_id;
+
+    res.render("account/editReview", {
+      title:
+        "Edit: " +
+        reviewData.inv_year +
+        " " +
+        reviewData.inv_make +
+        " " +
+        reviewData.inv_model,
+      nav,
+      header,
+      errors: null,
+    });
+  } else {
+    res.redirect("account/login");
+  }
+};
 module.exports = accountController;

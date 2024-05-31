@@ -86,4 +86,13 @@ router.post(
   Util.handleErrors(invController.deleteInventory)
 );
 
+//Add new Inventory
+router.post(
+  "/addReview",
+  Util.checkLogin,
+  validate.reviewRule(),
+  validate.checkReview,
+  Util.handleErrors(invController.addNewReview)
+);
+
 module.exports = router;

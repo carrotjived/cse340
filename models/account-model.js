@@ -100,6 +100,27 @@ async function getAccountById(account_id) {
   }
 }
 
+async function getReviews(account_id) {
+  try {
+    const sql =
+      "SELECT review_id,review_text, review_date, account_firstname, account_lastname, inv_make, inv_model FROM review JOIN account ON review.account_id = account.account_id JOIN inventory ON review.inv_id = inventory.inv_id WHERE review.account_id = $1 ORDER BY review_date DESC";
+    const data = await pool.query(sql, [account_id]);
+    return data.rows;
+  } catch (error) {
+    return new Error("No matching Reviews found");
+  }
+}
+
+async function getSpecificReview(review_id) {
+  try {
+    const sql =
+      "SELECT review_id, review_text, review_date, inv_make, inv_model, inv_year FROM public.review JOIN public.inventory ON public.review.inv_id = public.inventory.inv_id WHERE review_id = $1";
+    const data = await pool.query(sql, [review_id]);
+    return data.rows[0];
+  } catch (error) {
+    return new Error("No matching Reviews found, Error at: " + error);
+  }
+}
 module.exports = {
   registerAccount,
   checkExistingEmail,
@@ -108,4 +129,6 @@ module.exports = {
   updatePassword,
   getAllEmail,
   getAccountById,
+  getReviews,
+  getSpecificReview,
 };

@@ -270,7 +270,8 @@ h1 {
 #updateAccount label,
 #updatepassword label,
 #updateAccount input,
-#updatePassword input {
+#updatePassword input,
+#reviewForm label {
   margin-bottom: 15px;
 }
 
@@ -302,7 +303,8 @@ h1 {
 #updateForm label,
 #deleteForm label,
 #updateAccount label,
-#updatePassword label {
+#updatePassword label,
+#reviewForm {
   font-size: x-large;
   font-family: var(--other-font);
 }
@@ -314,7 +316,8 @@ h1 {
 #updateForm input[type="submit"],
 #deleteForm input[type="submit"],
 #updateAccount input[type="submit"],
-#updatePassword input[type="submit"] {
+#updatePassword input[type="submit"],
+#reviewForm input[type="submit"] {
   font-size: large;
 }
 
@@ -325,7 +328,8 @@ h1 {
 #updateForm input:required,
 #deleteForm input:required,
 #updateAccount input:required,
-#updatePassword input:required {
+#updatePassword input:required,
+#reviewForm textarea:required {
   border-left: solid 6px black;
 }
 
@@ -336,7 +340,8 @@ h1 {
 #updateForm input:required:valid,
 #deleteForm input:required:valid,
 #updateAccount input:required:valid,
-#updatePassword input:required:valid {
+#updatePassword input:required:valid,
+#reviewForm textarea:required:valid {
   border-left: solid 6px green;
 }
 
@@ -437,6 +442,39 @@ h3 {
   padding: 10px;
   border-radius: 15px;
 }
+
+#reviewHeading, .addReviewLabel {
+  border-bottom: solid 4.5px black;
+  text-align: left;
+}
+
+#reviewForm {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+#reviewForm textarea,
+#reviewForm input[type="submit"] {
+  width: 50%;
+  margin: 20px;
+}
+
+#reviewsData {
+  font-family: var(--other-font);
+  list-style: none;
+  text-align: left;
+}
+.review-accountName {
+  font-weight: bolder;
+}
+
+.reviewLogin {
+  text-align: left;
+  font-family: var(--other-font);
+}
+
+
 
 @media screen and (max-width: 500px) {
   html {

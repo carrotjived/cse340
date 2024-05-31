@@ -84,7 +84,6 @@ validate.checkRegData = async (req, res, next) => {
 };
 
 validate.checkInvData = async (req, res, next) => {
-  
   let header = await utilities.showHeader(
     res.locals.loggedin,
     res.locals.account_id
@@ -103,7 +102,7 @@ validate.checkInvData = async (req, res, next) => {
     inv_color,
     classification_id,
   } = req.body;
-  
+
   console.log(req.body);
   let errors = [];
   errors = validationResult(req);
@@ -171,4 +170,30 @@ validate.checkUpdateData = async (req, res, next) => {
   next();
 };
 
+validate.checkReview = async (req, res, next) => {
+  const { inv_id } = req.body;
+  let errors = [];
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    req.flash(
+      "message warning",
+      "Provide review text of at least 10 characters."
+    );
+    res.redirect(`/inv/detail/${inv_id}`);
+    return;
+  }
+  next();
+};
+
+validate.reviewRule = () => {
+  return [
+    body("review_text")
+      .trim()
+      .notEmpty()
+      .escape()
+      .isLength({ min: 5 })
+      .isString()
+      .withMessage("Provide review text of at least 5 characters."),
+  ];
+};
 module.exports = validate;

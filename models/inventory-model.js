@@ -140,6 +140,42 @@ async function deleteInventory(inv_id) {
   }
 }
 
+/* **************************************
+ * Get Reviews from database
+ * ************************************ */
+async function getReviews(inv_id) {
+  try {
+    const sql = 'SELECT review_text, review_date, account_firstname, account_lastname FROM review JOIN account ON review.account_id = account.account_id WHERE review.inv_id = $1 ORDER BY review_date DESC';
+    const data = await pool.query(sql, [inv_id]);
+    return data.rows;
+  } catch (error) {
+    console.error("Get Review Error: " + error);
+  }
+}
+
+async function getReviewsPerVehicle(inv_id){
+  try {
+    const sql = 
+    "SELECT * FROM public.review WHERE inv_id = $1";
+    const data = await pool.query(sql, [inv_id])
+    return data.rows;
+  } catch (error){
+    console.error("Get Review Error")
+  }
+}
+/* ************************
+ * Post New Reviews
+ ************************** */
+async function addNewReview(review_text, account_id, inv_id) {
+  try {
+    const sql =
+      "INSERT INTO public.review (review_text, account_id, inv_id) VALUES ($1, $2, $3)";
+    const data = await pool.query(sql, [review_text, account_id, inv_id]);
+    return data.rows;
+  } catch (error) {
+    console.error("Add Review Error: " + error);
+  }
+}
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
@@ -148,4 +184,6 @@ module.exports = {
   addInventory,
   updateInventory,
   deleteInventory,
+  getReviews,
+  addNewReview, getReviewsPerVehicle,
 };

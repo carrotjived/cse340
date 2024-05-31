@@ -257,4 +257,57 @@ Util.findEmail = (account_email, emailArray) => {
   return emailArray.find((email) => email.account_email === account_email);
 };
 
+/* **************************************
+ * Build the inventory review view
+ * ************************************ */
+Util.buildReview = (reviewData) => {
+  let reviews = "<ul id='reviewsData'>";
+  if (reviewData.length > 0) {
+    reviewData.forEach((review) => {
+      let reviewDate = new Date(review.review_date);
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      let displayDate = reviewDate.toLocaleDateString("en-US", options);
+
+      reviews += `<li><span class="review-accountName">${review.account_firstname.slice(
+        0,
+        1
+      )}${review.account_lastname}</span> wrote on ${displayDate}: <br>`;
+      reviews += `${review.review_text}`;
+      reviews += "</li>";
+    });
+    reviews += "</ul>";
+  } else {
+    reviews = "<p>Be the first to post a review</p>";
+  }
+
+  return reviews;
+};
+
+/* **************************************
+ * Build the inventory review view
+ * ************************************ */
+Util.displayReview = async function (reviewData) {
+  let reviews = "<ul id='reviewsData'>";
+  let count = 1;
+  if (reviewData.length > 0) {
+    reviewData.forEach((review) => {
+      let reviewDate = new Date(review.review_date);
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      let displayDate = reviewDate.toLocaleDateString("en-US", options);
+
+      reviews += `<li>${count}. Reviewed the <span>${review.inv_make} ${review.inv_model}</span> on ${displayDate}: "`;
+      reviews += `${review.review_text}"`;
+      reviews += `| <a href='/account/edit/${review.review_id}'>Edit </a> | <a href='/account/delete/${review.review_id}'> Delete</a>`;
+      reviews += "</li>";
+      count++;
+    });
+
+    reviews += "</ul>";
+  } else {
+    reviews = "No Reviews found";
+  }
+
+  return reviews;
+};
+
 module.exports = Util;

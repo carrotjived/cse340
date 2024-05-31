@@ -20,6 +20,7 @@ const accountRoute = require("./routes/accountRoute");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
+
 require("dotenv").config();
 
 /* ***********************
@@ -112,6 +113,8 @@ app.get(
   utilities.checkJWToken,
   utilities.handleErrors(invControllers.buildAddInventory)
 );
+
+
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

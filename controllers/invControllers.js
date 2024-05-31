@@ -29,21 +29,37 @@ invCont.buildByClassificationId = async function (req, res, next) {
  * ************************** */
 invCont.buildByInventoryId = async function (req, res, next) {
   const inventory_id = req.params.inventoryId;
+  res.locals.inv_id = inventory_id;
   const data = await invModel.getInventoryByInventoryId(inventory_id);
+  console.log(data);
+
   const details = await utilities.buildItemInventoryGrid(data);
+
+  const reviewData = await invModel.getReviews(inventory_id);
+
+  const reviews = utilities.buildReview(reviewData);
+
+  // const dropReview = utilities.dropReview(res.locals.loggedin);
+
   let nav = await utilities.getNav();
+
   let header = await utilities.showHeader(
     res.locals.loggedin,
     res.locals.account_id
   );
+
+  console.log(res.locals);
+
   const carYear = data[0].inv_year;
   const carMake = data[0].inv_make;
   const carModel = data[0].inv_model;
+
   res.render("inventory/inventory-details", {
     title: carYear + " " + carMake + " " + carModel,
     nav,
     header,
     details,
+    reviews,
   });
 };
 
@@ -225,6 +241,7 @@ invCont.modifyInventory = async function (req, res) {
     res.locals.loggedin,
     res.locals.account_id
   );
+  console.log(res.locals);
   const inventory_id = parseInt(req.params.inventory_id);
   const invData = await invModel.getInventoryByInventoryId(inventory_id);
   const classificationSelect = await utilities.buildClassificationList(
@@ -382,4 +399,25 @@ invCont.deleteInventory = async function (req, res, next) {
   }
 };
 
+/* ************************
+ * Add New Review
+ ************************** */
+invCont.addNewReview = async function (req, res, next) {
+  const { review_text, account_id, inv_id } = req.body;
+  console.log(review_text, account_id, inv_id);
+
+  const addResult = await invModel.addNewReview(
+    review_text,
+    account_id,
+    inv_id
+  );
+
+  if (addResult) {
+    req.flash("notice", "Review has been added!");
+    res.redirect(`/inv/detail/${parseInt(inv_id)}`);
+  } else {
+    req.flash("notice", "Review was not added");
+    res.redirect(`/inv/detail/${inv_id}`);
+  }
+};
 module.exports = invCont;
