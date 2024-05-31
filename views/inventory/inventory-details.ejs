@@ -18,14 +18,14 @@ locals.account_firstname[0]+locals.account_lastname %> <%- messages()%>
   <label for="screenName"
     >Screen Name:
 
-    <input name="screenname" id="screenname" value="<%- screenName %>" readonly
+    <input name="screenname" id="screenname" value="<%= screenName %>" readonly
   /></label>
 
   <label for="review">Review: </label>
   <textarea name="review_text" id="review" rows="5" required></textarea>
-  <input type="hidden" name="account_id" value="<%- locals.account_id %>" />
+  <input type="hidden" name="account_id" value="<%= locals.account_id %>" />
 
-  <input type="hidden" name="inv_id" value="<%- locals.inv_id %>" />
+  <input type="hidden" name="inv_id" value="<%= locals.inv_id %>" />
 
   <input type="submit" value="Add New Review" />
 </form>

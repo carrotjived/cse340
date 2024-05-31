@@ -86,7 +86,7 @@ router.post(
   Util.handleErrors(invController.deleteInventory)
 );
 
-//Add new Inventory
+//Add new Review
 router.post(
   "/addReview",
   Util.checkLogin,

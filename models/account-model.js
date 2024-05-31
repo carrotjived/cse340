@@ -121,6 +121,30 @@ async function getSpecificReview(review_id) {
     return new Error("No matching Reviews found, Error at: " + error);
   }
 }
+
+async function updateReview(review_id, review_text, review_date) {
+  try {
+    const sql =
+      "UPDATE public.review SET review_text = $2 WHERE review_id = $1 RETURNING *";
+    const data = await pool.query(sql, [review_id, review_text]);
+    return data.rows;
+  } catch (error) {
+    return new Error("No matching Reviews found, Error at: " + error);
+  }
+}
+
+/* ****************************************
+ *  Delete Review
+ * *************************************** */
+async function deleteReview(review_id) {
+  try {
+    const sql = "DELETE FROM public.review WHERE review_id = $1";
+    const data = await pool.query(sql, [review_id]);
+    return true;
+  } catch (error) {
+    return new Error("NO matching Reviews. Error at: " + error);
+  }
+}
 module.exports = {
   registerAccount,
   checkExistingEmail,
@@ -131,4 +155,5 @@ module.exports = {
   getAccountById,
   getReviews,
   getSpecificReview,
+  updateReview, deleteReview,
 };

@@ -56,7 +56,28 @@ router.post(
   utilities.handleErrors(accountController.updatePassword)
 );
 
-router.get("/edit/:review_id", utilities.handleErrors(accountController.buildEdit))
+router.get(
+  "/edit/:review_id",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildEdit)
+);
+
+router.post(
+  "/edit-review",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.editReview)
+);
+
+router.get(
+  "/delete/:review_id",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildDelete)
+);
+router.post(
+  "/deleteReview",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.deleteReview)
+);
 
 router.get("/logout", utilities.handleErrors(accountController.logout));
 module.exports = router;

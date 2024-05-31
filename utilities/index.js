@@ -217,9 +217,9 @@ Util.showHeader = async function (loggedin, accountId) {
     let accountData = await accountModel.getAccountById(accountId);
     let firstName = accountData.account_firstname;
 
-    let header =
+    let header = `<h2><a title="Management View" href="/account/" id="welcomeBasic">Welcome ${firstName}</a></h2>`;
+    header +=
       '<h2><a title="Logout" href="/account/logout" id="logout">Logout</a></h2>';
-    header += `<h2><a title="Management View" href="/account/" id="welcomeBasic">Welcome ${firstName}</a></h2>`;
     return header;
   } else {
     let header =

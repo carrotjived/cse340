@@ -1,5 +1,5 @@
 <%if (title) { %>
-    <h1><%= title %></h1>
+    <h1 id="title"><%= title %></h1>
     <%}else {res.redirect('/')} %> <% if (errors){ %>
     <ul class="notice">
       <% errors.array().forEach(error => { %>
@@ -9,22 +9,21 @@
     <% }%> <%- messages() %>
     
     <form action="/account/edit-review" method="post" id="editReview">
-      <fieldset>
-        <legend>ALL FIELDS ARE REQUIRED</legend>
         <label for="review-date"
-          >Review Date
-          <input readonly value="<%-locals.review_date%>" />
-        </label>
-        <label for="review-text"
-          >Review Text
+          >Review Date</label>
+          <input readonly value="<%= locals.review_date_parsed%>" class="reviewDate"/>
+        
+        <label for="review-text">Review Text</label>
           <textarea
+            rows="5"
             name="review_text"
             id="edit-review-text"
-            value="<%- locals.review_text%>"
-          ></textarea>
-        </label>
-        <input type="hidden" name="account_id" <% if (locals.account_id) { %> value="<%=locals.account_id %>"<%}%>>
+            required
+          ><%= locals.review_text%></textarea>
+
+        <input type="hidden" name="review_id" <% if (locals.review_id) { %> value="<%=locals.review_id %>"<%}%>>
+       
         <input type="submit" value="Edit Review" id="submitUpdate" />
-      </fieldset>
+    
     </form>
     
