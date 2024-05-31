@@ -234,7 +234,7 @@ Util.showHeader = async function (loggedin, accountId) {
 Util.welcomeMessage = async function (accountType, account_id) {
   let accountData = await accountModel.getAccountById(account_id);
   if (accountType == "Employee" || accountType == "Admin") {
-    let welcome = `<h2 id="welcomeName">Welcome ${accountData.account_firstname}!`;
+    let welcome = `<h2 id="welcomeName">Welcome ${accountData.account_firstname}!</h2>`;
     welcome +=
       '<p><a href="/account/update" id="updateButton">Update Contact Information</a></p>';
     welcome += "<h3>Manage Inventory</h3>";
